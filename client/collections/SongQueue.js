@@ -11,7 +11,7 @@ var SongQueue = Backbone.Collection.extend({
     }, this);
 
     this.on('ended', function(song) {
-      // if song ends, remove from models
+      // if song ends, remove song
       this.shift();
       // check to see if any other songs in queue
         // if yes, play that song
@@ -23,6 +23,9 @@ var SongQueue = Backbone.Collection.extend({
     this.on('dequeue', function(song) {
       // if song is clicked in queue, song must be removed from list
       this.remove(song);
+      if (this.length >= 1) {
+        this.playFirst();
+      }
     }, this);
   },
 
